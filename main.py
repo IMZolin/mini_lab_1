@@ -53,6 +53,10 @@ class Entries:
             else:
                 self.parent_window.entries.entries_list.remove(entry)
                 entry.pack_forget()
+            plot_button = self.parent_window.get_button_by_name('plot')#fixing bug with deleting entry
+            if plot_button:
+                plot_button.pack_forget()
+            self.parent_window.add_button('plot', 'Plot', 'plot', hot_key='<Return>')
 # class for plotting (класс для построения графиков)
 class Plotter:
     def __init__(self, x_min=-20, x_max=20, dx=0.01):
@@ -175,6 +179,7 @@ class Commands:
 
     def open_file(self):
         self.__forget_canvas()
+        self.__forget_navigation()
         file = askopenfile()
         if file != None:
             dict = json.load(file)
