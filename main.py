@@ -189,6 +189,11 @@ class Commands:
             for entry_text in dict['list_of_function']:
                 self.parent_window.entries.add_entry(entry_text)
             self.parent_window.commands.plot()
+        else:# fixing bug with opening file
+            plot_button = self.parent_window.get_button_by_name('plot')
+            if plot_button:
+                plot_button.pack_forget()
+            self.parent_window.add_button('plot', 'Plot', 'plot', hot_key='<Return>')
 
     def save_as(self):
         self._state.save_state()
